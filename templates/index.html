@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦜 鹦鹉智能喂食器 + 换水系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>🦜 鹦鹉智能控制系统</h1>
+            <p id="current-time" class="time-display"></p>
+        </header>
+
+        <!-- 系统状态栏 -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="label">系统状态:</span>
+                <span id="system-status" class="status-value online">● 在线</span>
+            </div>
+            <div class="status-item">
+                <span class="label">最后更新:</span>
+                <span id="last-update" class="status-value">--</span>
+            </div>
+        </div>
+
+        <!-- 主要控制区域 -->
+        <div class="main-content">
+            
+            <!-- 喂食控制面板 -->
+            <div class="panel feed-panel">
+                <h2>🍖 喂食控制</h2>
+                
+                <div class="feed-info">
+                    <div class="info-row">
+                        <span>上次喂食:</span>
+                        <span id="last-feed-time">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span>总喂食次数:</span>
+                        <span id="total-feeds">0</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="feed('small')" class="btn btn-small">
+                        🥣 少量
+                    </button>
+                    <button onclick="feed('normal')" class="btn btn-primary btn-large">
+                        🍽️ 正常喂食
+                    </button>
+                    <button onclick="feed('large')" class="btn btn-large">
+                        🍖 多量
+                    </button>
+                </div>
+
+                <div id="feed-message" class="message-box"></div>
+            </div>
+
+            <!-- 换水控制面板 -->
+            <div class="panel water-panel">
+                <h2>💧 换水控制</h2>
+                
+                <div class="water-info">
+                    <div class="info-row">
+                        <span>上次换水:</span>
+                        <span id="last-water-change">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span>下次换水:</span>
+                        <span id="next-water-change">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span>换水次数:</span>
+                        <span id="total-water-changes">0</span>
+                    </div>
+                    <div class="info-row">
+                        <span>状态:</span>
+                        <span id="water-status" class="status-normal">正常</span>
+                    </div>
+                </div>
+
+                <button onclick="changeWater()" class="btn btn-primary btn-block">
+                    🚰 立即换水 (150ml)
+                </button>
+
+                <div class="schedule-setting">
+                    <label for="water-interval">自动换水间隔:</label>
+                    <select id="water-interval" onchange="updateWaterSchedule()">
+                        <option value="6">每 6 小时</option>
+                        <option value="12">每 12 小时</option>
+                        <option value="24" selected>每 24 小时</option>
+                        <option value="48">每 48 小时</option>
+                    </select>
+                </div>
+
+                <div id="water-message" class="message-box"></div>
+            </div>
+
+        </div>
+
+        <!-- 定时任务信息 -->
+        <div class="panel schedule-panel">
+            <h2>⏰ 喂食计划</h2>
+            <div id="feed-schedule" class="schedule-list">
+                <div class="schedule-item">
+                    <span class="time">08:00</span>
+                    <span class="portion">正常分量</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">12:00</span>
+                    <span class="portion">少量</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">18:00</span>
+                    <span class="portion">正常分量</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>🦜 鹦鹉智能喂食器 v1.0 | 树莓派4驱动</p>
+            <p class="small-text">基于 Flask + RPi.GPIO | 远程控制已启用</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

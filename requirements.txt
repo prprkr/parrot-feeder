@@ -1,0 +1,22 @@
+# 鹦鹉智能喂食器 + 换水系统 - Python依赖
+
+# Web框架
+Flask==2.3.2
+
+# GPIO控制（树莓派）
+RPi.GPIO==0.7.1
+gpiozero==1.6.2
+
+# 定时任务调度
+APScheduler==3.10.1
+
+# 数据库（可选，用于记录日志）
+SQLAlchemy==2.0.21
+
+# 工具库
+python-dotenv==1.0.0
+
+# 开发和测试依赖（可选）
+# pytest==7.4.0
+# black==23.7.0
+# flake8==6.1.0
